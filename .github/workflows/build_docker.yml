@@ -23,4 +23,3 @@ jobs:
         context: .
         push: true
         tags: dschuld/document-sorter:latest
-        platforms: linux/amd64,linux/arm64
