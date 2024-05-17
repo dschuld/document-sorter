@@ -10,6 +10,7 @@ import os
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+import shutil
 
 PROMPT = """
 Your are an assistant that helps the user to analyze documents and categorizes them.
@@ -59,7 +60,7 @@ def call_gpt(text):
 def move_and_rename_file(source_path, destination_folder, new_filename):
     filename = os.path.basename(source_path)
     destination_path = os.path.join(destination_folder, new_filename)
-    os.rename(source_path, destination_path)
+    shutil.move(source_path, destination_path)
     print(f"File '{filename}' moved and renamed to '{new_filename}' in '{destination_folder}'.")
 
 
