@@ -35,6 +35,9 @@ This is the document in text form:
 
 """
 
+DOWNLOADS_DIR = "/mnt/Downloads"
+PROCESSED_DIR = "/mnt/processed"
+
 def read_pdf_file(file_path):
     with open(file_path, 'rb') as file:
         reader = PyPDF2.PdfReader(file)
@@ -65,8 +68,8 @@ def process_file(path, metadata):
     print("Received metadata: " + json.dumps(metadata))
     if (metadata["type"] == "invoice" or metadata["type"] == "credit_note"):
         print("Moving file to invoices")
-        new_filename = metadata["date"] + "-" + metadata["vendor"] + ".pdf"
-        move_and_rename_file(path, "/home/david/Downloads/invoices/", new_filename)
+        new_filename = metadata["vendor"] + "-" + metadata["date"] + ".pdf"
+        move_and_rename_file(path, PROCESSED_DIR, new_filename)
     else:
         print("No invoice - leaving file in Downloads folder")
 
@@ -91,6 +94,6 @@ def monitor_downloads_folder(path):
     observer.join()
 
 # Example usage
-monitor_downloads_folder("/home/david/Downloads")
+monitor_downloads_folder(DOWNLOADS_DIR)
 
 

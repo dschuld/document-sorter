@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2docker run -v /host/directory1:/app/directory1 -v /host/directory2:/app/directory2 -p 80:80 -d your-image-name
 
     - name: Login to DockerHub
       uses: docker/login-action@v1 
