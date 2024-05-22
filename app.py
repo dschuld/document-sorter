@@ -83,6 +83,7 @@ class PDFHandler(FileSystemEventHandler):
 
 def monitor_downloads_folder(path):
     event_handler = PDFHandler()
+    print(f"Monitoring folder '{path}' for new PDF files...")
     observer = Observer()
     observer.schedule(event_handler, path, recursive=False)
     observer.start()
@@ -93,6 +94,7 @@ def monitor_downloads_folder(path):
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
+    print("Monitoring stopped")
 
 # Example usage
 monitor_downloads_folder(DOWNLOADS_DIR)
