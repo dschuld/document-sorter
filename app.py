@@ -67,7 +67,7 @@ def move_and_rename_file(source_path, destination_folder, new_filename):
 
 def process_file(path, metadata):
     print("Received metadata: " + json.dumps(metadata))
-    if (metadata["type"] == "invoice" or metadata["type"] == "credit_note"):
+    if (metadata["type"] == "invoice" or metadata["type"] == "credit_note" or metadata["type"] == "credit note"):
         print("Moving file to invoices")
         new_filename = metadata["vendor"] + "-" + metadata["date"] + ".pdf"
         move_and_rename_file(path, PROCESSED_DIR, new_filename)
