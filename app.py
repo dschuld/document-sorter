@@ -49,7 +49,7 @@ def read_pdf_file(file_path):
 
 def call_gpt(text):
     messages = [{"role": "user", "content": text}]
-    response = client.chat.completions.create(model="gpt-4o",
+    response = client.chat.completions.create(model="gpt-4o-mini",
     messages=messages)
     response_message = response.choices[0].message.content    
     data_structure = json.loads(response_message)
