@@ -74,11 +74,18 @@ def process_file(path, metadata):
         print("No invoice - leaving file in Downloads folder")
 
 
+
 class PDFHandler(FileSystemEventHandler):
     def on_created(self, event):
         if event.src_path.endswith('.pdf'):
-            text = read_pdf_file(event.src_path)
-            process_file(event.src_path, call_gpt(PROMPT + text))
+            file_size = os.path.getsize(event.src_path)
+            if file_size > 200 * 1024: 
+                text = read_pdf_file(event.src_path)
+                process_file(event.src_path, call_gpt(PROMPT + text))
+            else:
+                print(f"File '{event.src_path}' is smaller than 200 KB and will not be processed.")
+
+
 
 def monitor_downloads_folder(path):
     event_handler = PDFHandler()
