@@ -79,11 +79,11 @@ class PDFHandler(FileSystemEventHandler):
     def on_created(self, event):
         if event.src_path.endswith('.pdf'):
             file_size = os.path.getsize(event.src_path)
-            if file_size > 200 * 1024: 
+            if file_size < 200 * 1024: 
                 text = read_pdf_file(event.src_path)
                 process_file(event.src_path, call_gpt(PROMPT + text))
             else:
-                print(f"File '{event.src_path}' is smaller than 200 KB and will not be processed.")
+                print(f"File '{event.src_path}' is larger than 200 KB and will not be processed.")
 
 
 
